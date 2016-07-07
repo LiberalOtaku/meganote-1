@@ -22,9 +22,7 @@
     function getNotes() {
       const notesPromise = $http.get(DATABASE_URL);
 
-      notesPromise.then(function(res) {
-        service.notes = res.data;
-      });
+      notesPromise.then(res => service.notes = res.data);
 
       return notesPromise;
     }
@@ -34,9 +32,7 @@
         note: note
       });
 
-      notesPromise.then(function(res) {
-        service.notes.unshift(res.data.note);
-      });
+      notesPromise.then(res => service.notes.unshift(res.data.note));
 
       return notesPromise;
     }
@@ -46,10 +42,11 @@
         note: note
       });
 
-      notesPromise.then(function(res) {
-        service.removeById(res.data.note._id);
-        service.notes.unshift(res.data.note);
-      });
+      notesPromise
+        .then(res => {
+          service.removeById(res.data.note._id);
+          service.notes.unshift(res.data.note);
+        });
 
       return notesPromise;
     }
@@ -57,9 +54,7 @@
     function deleteNote(note) {
       const notesPromise = $http.delete(`${DATABASE_URL}${note._id}`);
 
-      notesPromise.then(function(res) {
-        service.removeById(res.data.note._id);
-      });
+      notesPromise.then(res => service.removeById(res.data.note._id));
 
       return notesPromise;
     }
