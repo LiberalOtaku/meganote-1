@@ -42,7 +42,7 @@
     }
 
     function update(note) {
-      const notesPromise = $http.put(DATABASE_URL + note._id, {
+      const notesPromise = $http.put(`${DATABASE_URL}${note._id}`, {
         note: note
       });
 
@@ -55,7 +55,7 @@
     }
 
     function deleteNote(note) {
-      const notesPromise = $http.delete(DATABASE_URL + note._id);
+      const notesPromise = $http.delete(`${DATABASE_URL}${note._id}`);
 
       notesPromise.then(function(res) {
         service.removeById(res.data.note._id);
