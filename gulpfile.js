@@ -38,7 +38,9 @@
       .pipe(sourcemaps.init())
 
       // transpile into ES5 for browsers
-      .pipe(babel())
+      .pipe(babel({
+        presets: ['es2015']
+      }))
 
       // Concatenate all JS files
       .pipe(concat('bundle.js'))
