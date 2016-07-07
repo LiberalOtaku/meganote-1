@@ -1,6 +1,4 @@
-(function() {
-  'use strict';
-
+{
   angular
     .module('meganote.layout')
     .directive('myHeader', myHeader);
@@ -12,4 +10,4 @@
       scope: {}
     };
   }
-})();
+}

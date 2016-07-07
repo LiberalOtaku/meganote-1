@@ -1,6 +1,4 @@
-(function() {
-  'use strict';
-
+{
   angular
     .module('meganote.notesForm')
     .config(notesFormConfig);
@@ -15,4 +13,4 @@
         controllerAs: 'vm'
       });
   }
-})();
+}

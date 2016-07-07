@@ -1,6 +1,4 @@
-(function() {
-  'use strict';
-
+{
   angular
     .module('meganote.notesForm')
     .directive('myNotesForm', myNotesForm);
@@ -11,4 +9,4 @@
       templateUrl: 'notesForm/directives/notesForm.html'
     };
   }
-})();
+}
