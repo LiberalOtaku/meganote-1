@@ -5,10 +5,11 @@
       '$http',
       'DATABASE_URL',
       ($http, DATABASE_URL) => {
+        const usersURL = `${DATABASE_URL}users/`;
         class UsersService {
           create(user) {
             return $http
-              .post(`${DATABASE_URL}users`, {
+              .post(usersURL, {
                 user,
               })
               .then(
