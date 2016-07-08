@@ -11,12 +11,7 @@
           }
 
           submit() {
-            if (this.user.password === this.user.passwordConfirmation) {
-              UsersService.create(this.user);
-            }
-            else {
-              console.log('Passwords don\'t match!');
-            }
+            UsersService.create(this.user);
           }
         }
 
