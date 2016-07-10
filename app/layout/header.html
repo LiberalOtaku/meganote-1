@@ -3,6 +3,8 @@
     <header>
       <div class="well">
         Meganote
+        <a ui-sref="sign-up" ng-hide="vm.isLoggedIn()">Sign Up</a>
+        <a ui-sref="sign-up" ng-show="vm.isLoggedIn()" ng-click="vm.logout()">Log Out</a>
       </div>
     </header>
   </div>

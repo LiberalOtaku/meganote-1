@@ -14,7 +14,7 @@
         }
 
         get() {
-          return this.token;
+          return $window.localStorage.getItem('authToken');
         }
 
         clear() {
