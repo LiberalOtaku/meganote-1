@@ -21,6 +21,10 @@
           this.user = undefined;
           $window.localStorage.removeItem('currentUser');
         }
+
+        isLoggedIn() {
+          return !!(this.get()._id);
+        }
       }
 
       return new CurrentUser();

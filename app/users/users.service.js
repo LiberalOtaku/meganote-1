@@ -23,6 +23,27 @@
                 }
               );
           }
+
+          // Sign In
+          login(user) {
+            return $http
+              .post(`${DATABASE_URL}sessions/`, {
+                user,
+              })
+              .then(
+                res => {
+                  AuthToken.set(res.data.authToken);
+                  CurrentUser.set(res.data.user);
+                }
+              );
+          }
+
+          // Update Profile
+          update(user) {
+            return $http
+              .put(`${usersURL}${user._id}`, { user })
+              .then(res => CurrentUser.set(res.data.user));
+          }
         }
 
         return new UsersService();

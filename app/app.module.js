@@ -13,6 +13,7 @@
       'meganote.notesForm',
       'meganote.layout',
       'meganote.signUp',
+      'meganote.signIn',
       'meganote.users'
     ])
     .config(configFunction);

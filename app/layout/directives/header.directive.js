@@ -6,7 +6,7 @@
   function myHeader() {
     return {
       restrict: 'AE',
-      templateUrl: 'layout/header.html',
+      templateUrl: 'layout/directives/header.html',
       controller: NavbarController,
       controllerAs: 'vm',
       bindToController: true,
