@@ -47,7 +47,7 @@
     function deleteNote() {
       NotesService.deleteNote(vm.note)
         .then(
-          () => vm.clearForm()
+          () => $state.go('notes.form', { noteId: undefined })
         );
     }
   }
