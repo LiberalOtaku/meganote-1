@@ -5,7 +5,7 @@
 
       class CurrentUser {
         constructor() {
-          this.token = JSON.parse($window.localStorage.getItem('currentUser'));
+          this.user = JSON.parse($window.localStorage.getItem('currentUser'));
         }
 
         set(user) {
