@@ -3,15 +3,17 @@
     .module('meganote.signIn')
     .directive('mySignIn', [
       '$state',
+      'Flash',
       'UsersService',
-      ($state, UsersService) => {
+      ($state, Flash, UsersService) => {
 
         class SignInController {
           submit() {
             var vm = this;
             UsersService
               .login(vm.user)
-              .then(() => $state.go('notes.form', { noteId: undefined }));
+              .then(() => $state.go('notes.form', { noteId: undefined }))
+              .catch(error => Flash.create('danger', error.data.message));
           }
         }
 

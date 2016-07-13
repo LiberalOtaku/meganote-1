@@ -3,8 +3,9 @@
     .module('meganote.signUp')
     .directive('mySignUp', [
       '$state',
+      'Flash',
       'UsersService',
-      ($state, UsersService) => {
+      ($state, Flash, UsersService) => {
 
         class SignUpController {
           constructor() {
@@ -14,7 +15,8 @@
           submit() {
             UsersService
               .create(this.user)
-              .then(() => $state.go('notes.form', { noteId: undefined }));
+              .then(() => $state.go('notes.form', { noteId: undefined }))
+              .catch(error => Flash.create('danger', error.data.message));
           }
         }
 

@@ -121,5 +121,7 @@ body .alert.alert-success {
   background-color: inherit;
 }
 body .alert-danger {
+  display: inline-block;
+  width: 300px;
   margin-top: 1rem;
 }
