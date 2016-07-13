@@ -8,15 +8,18 @@
     $stateProvider
       .state('sign-up', {
         url: '/sign-up',
-        template: '<div my-sign-up></div>'
+        template: '<div my-sign-up></div>',
+        onExit: ['Flash', Flash => Flash.clear()],
       })
       .state('sign-in', {
         url: '/sign-in',
-        template: '<div my-sign-in></div>'
+        template: '<div my-sign-in></div>',
+        onExit: ['Flash', Flash => Flash.clear()],
       })
       .state('profile', {
         url: '/profile',
-        template: '<div my-user-profile></div>'
+        template: '<div my-user-profile></div>',
+        onExit: ['Flash', Flash => Flash.clear()],
       });
   }
 }

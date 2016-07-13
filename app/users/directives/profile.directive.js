@@ -4,7 +4,8 @@
     .directive('myUserProfile', [
       'CurrentUser',
       'UsersService',
-      (CurrentUser, UsersService) => {
+      'Flash',
+      (CurrentUser, UsersService, Flash) => {
         class UserProfileController {
           constructor() {
             var vm = this;
@@ -13,7 +14,9 @@
 
           submit() {
             var vm = this;
-            UsersService.update(vm.user);
+            UsersService
+              .update(vm.user)
+              .then(() => Flash.create('success', 'Your changes have been saved!'));
           }
         }
 
@@ -46,6 +49,11 @@
                     <span class="login">
                       <a ui-sref="notes.form({ noteId: undefined })">Back To My Notes</a>
                     </span>
+
+                    <flash-message
+                      duration="3000"
+                      show-close="false"></flash-message>
+
                   </form>
                 </div>
               </div>

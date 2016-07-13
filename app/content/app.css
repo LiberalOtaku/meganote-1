@@ -109,7 +109,7 @@ span.login {
 .ta-editor {
   margin-top: 0.5em; }
 
-body .alert.alert-success {
+.note-alerts .alert.alert-success {
   padding: 0;
   margin: 0;
   display: inline-block;
@@ -120,7 +120,7 @@ body .alert.alert-success {
   color: #d3d3d3;
   background-color: inherit;
 }
-body .alert-danger {
+.alert-danger, .alert-success {
   display: inline-block;
   width: 300px;
   margin-top: 1rem;
