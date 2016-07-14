@@ -7,6 +7,7 @@
       // Third-party modules
       'ngFlash',
       'textAngular',
+      'angularSpinner',
 
       // Custom modules
       'meganote.notes',

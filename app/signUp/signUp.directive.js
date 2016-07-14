@@ -13,10 +13,13 @@
           }
 
           submit() {
+            var vm = this;
+            vm.loading = true;
             UsersService
-              .create(this.user)
+              .create(vm.user)
               .then(() => $state.go('notes.form', { noteId: undefined }))
-              .catch(error => Flash.create('danger', error.data.message));
+              .catch(error => Flash.create('danger', error.data.message))
+              .finally(() => vm.loading = false);
           }
         }
 

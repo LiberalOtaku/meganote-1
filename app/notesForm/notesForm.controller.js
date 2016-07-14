@@ -21,6 +21,7 @@
     }
 
     function saveNote() {
+      vm.loading = true;
       if (vm.note._id) {
         NotesService.update(vm.note)
           .then(
@@ -29,7 +30,8 @@
               Flash.create('success', res.data.message);
             },
             () => Flash.create('danger', 'Oops! Something went wrong.')
-          );
+          )
+          .finally(() => vm.loading = false);
       }
       else {
         NotesService.create(vm.note)
@@ -40,15 +42,18 @@
               $state.go('notes.form', { noteId: vm.note._id });
             },
             () => Flash.create('danger', 'Oops! Something went wrong.')
-          );
+          )
+          .finally(() => vm.loading = false);
       }
     }
 
     function deleteNote() {
+      vm.loading = true;
       NotesService.deleteNote(vm.note)
         .then(
           () => $state.go('notes.form', { noteId: undefined })
-        );
+        )
+        .finally(() => vm.loading = false);
     }
   }
 }

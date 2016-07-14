@@ -14,15 +14,19 @@
 
           submit() {
             var vm = this;
+            vm.loading = true;
             UsersService
               .update(vm.user)
-              .then(() => Flash.create('success', 'Your changes have been saved!'));
+              .then(() => Flash.create('success', 'Your changes have been saved!'))
+              .finally(() => vm.loading = false);
           }
         }
 
         return {
           restrict: 'EA',
           template: `
+            <div us-spinner="{ top: '10%' }" spinner-on="vm.loading"></div>
+
             <div class="container">
               <div class="row">
                 <div class="col-xs-6 col-xs-offset-4">
