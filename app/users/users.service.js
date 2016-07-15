@@ -13,9 +13,7 @@
           // Sign Up
           create(user) {
             return $http
-              .post(usersURL, {
-                user,
-              })
+              .post(usersURL, { user })
               .then(
                 res => {
                   AuthToken.set(res.data.authToken);
@@ -27,9 +25,7 @@
           // Sign In
           login(user) {
             return $http
-              .post(`${DATABASE_URL}sessions/`, {
-                user,
-              })
+              .post(`${DATABASE_URL}sessions/`, { user })
               .then(
                 res => {
                   AuthToken.set(res.data.authToken);

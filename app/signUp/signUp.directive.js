@@ -18,7 +18,7 @@
             UsersService
               .create(vm.user)
               .then(() => $state.go('notes.form', { noteId: undefined }))
-              .catch(error => Flash.create('danger', error.data.message))
+              .catch(error => Flash.create('danger', error.message))
               .finally(() => vm.loading = false);
           }
         }

@@ -7,3 +7,4 @@ tmp
 Thumbs.db
 .idea
 app/content/bundle.*
+app/content/vendor.*

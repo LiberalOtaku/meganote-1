@@ -3,9 +3,16 @@
     .module('meganote.notes')
     .controller('NotesController', NotesController);
 
-  NotesController.$inject = ['NotesService'];
-  function NotesController(NotesService) {
+  NotesController.$inject = ['Note'];
+  function NotesController(Note) {
     const vm = this;
-    vm.notes = NotesService.notes;
+    vm.notes = Note.query();
+    vm.refresh = refresh;
+
+    /////////////////////
+
+    function refresh() {
+      Note.query().$promise.then(notes => vm.notes = notes);
+    }
   }
 }

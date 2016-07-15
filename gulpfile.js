@@ -8,18 +8,45 @@
   var sourcemaps = require('gulp-sourcemaps');
   var babel = require('gulp-babel');
   var connect = require('gulp-connect');
+  var uglify = require('gulp-uglify');
+  var cleanCSS = require('gulp-clean-css');
 
   gulp.task('bundle', bundle);
+  gulp.task('vendor', vendor);
+  gulp.task('css', css);
   gulp.task('start-web-server', startWebServer);
   gulp.task('watch', watch);
-  gulp.task('default', ['bundle', 'start-web-server', 'watch']);
+  gulp.task('default', ['bundle', 'vendor', 'css', 'start-web-server', 'watch']);
 
   ////////////////////
 
+  var vendorJsFiles = [
+    'bower_components/jquery/dist/jquery.min.js',
+    'bower_components/bootstrap/dist/js/bootstrap.min.js',
+    'bower_components/angular-loader/angular-loader.min.js',
+    'bower_components/angular/angular.min.js',
+    'bower_components/angular-ui-router/release/angular-ui-router.min.js',
+    'bower_components/angular-flash-alert/dist/angular-flash.min.js',
+    'bower_components/textAngular/dist/textAngular-rangy.min.js',
+    'bower_components/textAngular/dist/textAngular-sanitize.min.js',
+    'bower_components/textAngular/dist/textAngular.min.js',
+    'bower_components/spin.js/spin.min.js',
+    'bower_components/angular-spinner/angular-spinner.min.js',
+    'bower_components/angular-resource/angular-resource.min.js',
+  ];
+
+  var cssFiles = [
+    'bower_components/font-awesome/css/font-awesome.css',
+    'bower_components/bootstrap/dist/css/bootstrap.css',
+    'bower_components/textAngular/dist/textAngular.css',
+    'app/content/app.css',
+  ];
+
   var jsFiles = [
     'app/**/*.js',
-    '!app/bower_components/**/*',
+    '!app/bower_components/**/*.js',
     '!app/content/bundle.js',
+    '!app/content/vendor.js',
   ];
 
   function bundle() {
@@ -39,15 +66,41 @@
 
       // transpile into ES5 for browsers
       .pipe(babel({
-        presets: ['es2015']
+        presets: ['es2015'],
+        compact: true,
       }))
 
       // Concatenate all JS files
       .pipe(concat('bundle.js'))
 
+      // Minify the file
+      .pipe(uglify())
+
       // emit the .map file for debugging
       .pipe(sourcemaps.write('.'))
 
+      .pipe(gulp.dest('app/content'));
+  }
+
+  function vendor() {
+    return gulp.src(vendorJsFiles)
+      .pipe(order(vendorJsFiles, { base: './' }))
+      .pipe(plumber())
+      .pipe(sourcemaps.init())
+      .pipe(concat('vendor.js'))
+      .pipe(uglify())
+      .pipe(sourcemaps.write('.'))
+      .pipe(gulp.dest('app/content'));
+  }
+
+  function css() {
+    return gulp.src(cssFiles)
+      .pipe(order(cssFiles, { base: './' }))
+      .pipe(plumber())
+      .pipe(sourcemaps.init())
+      .pipe(cleanCSS())
+      .pipe(concat('bundle.css'))
+      .pipe(sourcemaps.write('.'))
       .pipe(gulp.dest('app/content'));
   }
 
@@ -59,6 +112,18 @@
   }
 
   function watch() {
-    gulp.watch(['app/**/*', 'gulpfile.js'], ['bundle']);
+    gulp.watch([
+      'app/**/*',
+      '!app/content/bundle.*',
+      '!app/content/vendor.*',
+    ], ['bundle', 'css']);
+
+    gulp.watch([
+      'bower_components/**/*',
+    ], ['vendor', 'css']);
+
+    gulp.watch([
+      'gulpfile.js',
+    ], ['bundle', 'vendor', 'css']);
   }
 })();

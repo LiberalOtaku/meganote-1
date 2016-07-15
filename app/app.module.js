@@ -8,6 +8,7 @@
       'ngFlash',
       'textAngular',
       'angularSpinner',
+      'ngResource',
 
       // Custom modules
       'meganote.notes',
@@ -17,10 +18,18 @@
       'meganote.signIn',
       'meganote.users'
     ])
-    .config(configFunction);
+    .config(configFunction)
+    .run(run);
 
   configFunction.$inject = ['$urlRouterProvider'];
   function configFunction($urlRouterProvider) {
     $urlRouterProvider.otherwise('/notes/');
+  }
+
+  run.$inject = ['$rootScope', '$state'];
+  function run($rootScope, $state) {
+    $rootScope.$on('$stateChangeSuccess', () => $rootScope.$state = $state);
+
+    $rootScope.$on('$stateChangeError', () => $state.go('sign-in'));
   }
 }
