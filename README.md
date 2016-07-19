@@ -40,6 +40,4 @@ To change the URL of the API (`localhost:3030` by default), edit `app/constants.
 
 To deploy Meganote, copy the contents of the `app` folder to your remote server.
 
-### Live Example
-
-(coming soon)
+### [Live Example](https://liberalotaku.github.io/meganote-1/#/sign-in)
